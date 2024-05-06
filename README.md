@@ -6,7 +6,7 @@
 
 ## Introduction
 
-In this project, I build a mini honeynet in Azure and ingest log sources from various resources into a Log Analytics workspace, which is then used by Microsoft Sentinel to build attack maps, trigger alerts, and create incidents. I measured some security metrics in the insecure environment for 24 hours, apply some security controls to harden the environment, measure metrics for another 24 hours, then show the results below. The metrics we will show are:
+In this project, I built a mini honeynet in Azure and ingest log sources from various resources into a Log Analytics workspace, which is then used by Microsoft Sentinel to build attack maps, trigger alerts, and create incidents. I measured some security metrics in the insecure environment for 24 hours, apply some security controls to harden the environment, measure metrics for another 24 hours, then show the results below. The metrics we will show are:
 
 - SecurityEvent (Windows Event Logs)
 - Syslog (Linux Event Logs)
@@ -33,6 +33,13 @@ In this project, I build a mini honeynet in Azure and ingest log sources from va
 - NIST SP 800-61 Revision 2 for Incident Handling Guidance
 - Microsoft Defender for Cloud to Protect Cloud Resources
 - Microsoft Sentinel (SIEM)
+ 
+## Log Sources 
+Logs were ingested from from 7 data sources (data connectors) in to Log Analytics workspace and Microsoft Sentinel was used to analyze the ingested log data in real-time.
+By correlating events, identifying anomalies, and applying behavioral analytics, Sentinel was used to detect potential security threats and suspicious activities across the Azure environment.
+
+![Screenshot (123)](https://github.com/timthecyberguy/Azure-cloud-soc-project/assets/16265352/41d363e5-94da-4ab6-89cc-44f3036ec9bb)
+
 
 
 ## Architecture Before Hardening / Security Controls
@@ -81,6 +88,22 @@ Stop Time - 4/29/2024, 10:56:15 PM<br>
 | SecurityAlert            | 16
 | SecurityIncident         | 85
 | AzureNetworkAnalytics_CL | 3205
+
+
+## Incident Response
+When a security threat is detected, Microsoft Sentinel triggers alerts and generates incidents within the Log Analytics Workspace. incidents can can assigned to security analyst. 
+Security analysts can investigate these incidents directly within Sentinel's interface, leveraging the rich contextual information provided by the Log Analytics Workspace.
+
+For each attack I practiced incident responses following NIST SP 800-61 r2.
+
+<b>Assigning an incident </b> <br>
+
+![image](https://github.com/timthecyberguy/Azure-cloud-soc-project/assets/16265352/85c0b708-466e-4263-90bb-f89200c01f26)
+
+<b>investigating an incident </b>
+![Screenshot (129)](https://github.com/timthecyberguy/Azure-cloud-soc-project/assets/16265352/37595f86-5817-4861-9534-d0b7e9885176)
+      --------------------------------------------------------------------------------------------------------------------------
+![Screenshot (131)](https://github.com/timthecyberguy/Azure-cloud-soc-project/assets/16265352/ba15d25a-fb5f-426d-885f-62372badcc0b)
 
 
 ## Approach to Security Posture Improvement
@@ -134,6 +157,17 @@ Stop Time	5/2/2024, 2:45:31 PM<br>
 | SecurityIncident         | 2
 | AzureNetworkAnalytics_CL | 0
 
+
+
+As seen in the chart below, the incidents dropped significantly when the environment was hardened.
+
+![image](https://github.com/timthecyberguy/Azure-cloud-soc-project/assets/16265352/16e2a993-1595-4ed2-87ef-555b6c899e79)
+
+
+## Cost Analysis of Project 
+The total cost incurred for this exercise amounted to approximately $31 CAD. If I had opted to shut down my virtual machines (VMs) nightly, the expenses would have been lower; however, this action would have halted the ingestion of traffic into the logs. It's worth noting that the projected cost for leaving all resources running continuously for one month was estimated at $261 CAD.
+
+![image](https://github.com/timthecyberguy/Azure-cloud-soc-project/assets/16265352/dcf653c5-b600-49d3-aaf6-b397d60640e7)
 
 
 
